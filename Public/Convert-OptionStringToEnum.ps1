@@ -19,7 +19,7 @@ function Convert-OptionStringToEnum
             0..($Options.Length - 1) | Where-Object { $Options[$_] } | ForEach-Object {
                 "    value($($_); $($Options[$_]))",
                 '    {',
-                "        Caption='$($Options[$_])';",
+                "        Caption='$($Options[$_] -replace '^"', '' -replace '"$','')';",
                 '    }'
             }
         }
