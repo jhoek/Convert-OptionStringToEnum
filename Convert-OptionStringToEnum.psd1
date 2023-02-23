@@ -30,7 +30,7 @@ CompanyName = 'uncommonsense.nl'
 Copyright = 'Copyright (c) 2022 Jan Hoek'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description   = 'PowerShell micro-module for converting BC option strings to enum values'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -95,13 +95,13 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+            Tags       = @('powershell', 'module', 'enum', 'bc', 'al', 'optionstring')
 
-        # A URL to the license for this module.
-        # LicenseUri = ''
+            # A URL to the license for this module.
+            LicenseUri = 'https://github.com/jhoek/Convert-OptionStringToEnum/blob/main/LICENSE.md'
 
-        # A URL to the main website for this project.
-        # ProjectUri = ''
+            # A URL to the main website for this project.
+            ProjectUri = 'https://github.com/jhoek/Convert-OptionStringToEnum'
 
         # A URL to an icon representing this module.
         # IconUri = ''
