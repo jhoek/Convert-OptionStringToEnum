@@ -4,27 +4,47 @@ pbpaste | Convert-OptionStringToEnum | pbcopy
 #>
 function Convert-OptionStringToEnum
 {
+    [CmdletBinding(DefaultParameterSetName = '__AllParameterSets')]
     [OutputType([string])]
     param
     (
         [Parameter(Mandatory, Position = 0)]
         [string]$OptionString,
 
-        [Parameter(Position = 1, ParameterSetName = 'DevComment')]
+        [Parameter(Mandatory, Position = 1, ParameterSetName = 'DevComment')]
         [string]$DevComment,
 
         [Parameter(ParameterSetName = 'DevComment')]
         [ValidateNotNull()]
-        [string]$DevCommentFormat = { $_ }
+        [scriptblock]$DevCommentFormat = { "nl-NL=$($_)" }
     )
 
-    $Options = ($OptionString -split ',')
-    $DevComments = ($DevComment -split ',') | ForEach-Object -Process $DevCommentFormat
+    [string[]]$Options = ($OptionString -split ',')
+    [string[]]$DevComments = ($DevComment -split ',') | ForEach-Object -Process $DevCommentFormat
 
     0..($Options.Length - 1) | Where-Object { $Options[$_] } | ForEach-Object {
-        "    value($($_); $($Options[$_]))",
-        '    {',
-        "        Caption='$($Options[$_] -replace '^"', '' -replace '"$','')';",
+        $Caption = ($Options[$_]).TrimStart('"').TrimEnd('"')
+
+        if ($PSCmdlet.ParameterSetName -eq 'DevComment')
+        {
+            $Comment = ($DevComments[$_]).TrimStart('"').TrimEnd('"')
+        }
+
+        "    value($($_); $($Options[$_]))"
+        '    {'
+
+        switch ($PSCmdlet.ParameterSetName)
+        {
+            'DevComment'
+            {
+                "        Caption='$Caption'; Comment='$Comment'"
+            }
+            default
+            {
+                "        Caption='$Caption';"
+            }
+        }
+
         '    }'
     }
 }
