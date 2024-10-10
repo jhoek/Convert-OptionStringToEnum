@@ -12,6 +12,6 @@ Describe 'Convert-OptionStringToEnum' {
     }
 
     It 'Converts option captions' {
-        Convert-OptionStringToEnum -OptionString 'Foo,Baz' -DevComment 'Bar,Qux' | Should -Be @('    value(0; Foo)', '    {', '        Caption=''Foo''; Comment=''nl-NL=Bar''', '    }', '    value(1; Baz)', '    {', '        Caption=''Baz''; Comment=''nl-NL=Qux''', '    }')
+        Convert-OptionStringToEnum -OptionString 'Foo,Baz' -DevComment 'Bar,Qux' | Should -Be @('    value(0; Foo)', '    {', '        Caption=''Foo'', Comment=''nl-NL=Bar'';', '    }', '    value(1; Baz)', '    {', '        Caption=''Baz'', Comment=''nl-NL=Qux'';', '    }')
     }
 }

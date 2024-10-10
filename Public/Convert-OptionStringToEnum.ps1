@@ -37,7 +37,7 @@ function Convert-OptionStringToEnum
         {
             'DevComment'
             {
-                "        Caption='$Caption'; Comment='$Comment'"
+                "        Caption='$Caption', Comment='$Comment';"
             }
             default
             {
